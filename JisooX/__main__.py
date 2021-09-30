@@ -190,7 +190,7 @@ def start(bot: Bot, update: Update, args: List[str]):
                             InlineKeyboardButton(
                                 text="➕ Add Me To Your Group ➕",
                                 url="t.me/{}?startgroup=true".format(
-                                    context.bot.username,
+                                    bot.first_name,
                                 ),
                             ),
                         ],
