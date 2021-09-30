@@ -606,9 +606,6 @@ def main():
    
     source_handler = CommandHandler("source", source)
     
-    migrate_handler = MessageHandler(Filters.status_update.migrate, migrate_chats)
-
-    M_CONNECT_BTN_HANDLER = CallbackQueryHandler(m_connect_button, pattern=r"main_connect")
 
     # dispatcher.add_handler(test_handler)
     dispatcher.add_handler(start_handler)
@@ -616,9 +613,7 @@ def main():
     dispatcher.add_handler(settings_handler)
     dispatcher.add_handler(help_callback_handler)
     dispatcher.add_handler(settings_callback_handler)
-    dispatcher.add_handler(migrate_handler)
     dispatcher.add_handler(source_handler)
-    dispatcher.add_handler(M_CONNECT_BTN_HANDLER)
     dispatcher.add_handler(IMDB_HANDLER)
     dispatcher.add_handler(IMDB_SEARCHDATAHANDLER)
     
