@@ -41,9 +41,9 @@ from JisooX.modules.connection import connect_button
 
 
 PM_START_TEXT = """
-_Hello_ *{}*
-_My name is_ *{}*\n_A Powerful Telegram ProBot to Manage Your Groups,feel free to add to your groups!!_
-_Maintained by_ [{}](tg://user?id={})
+Hello *{}*
+I Am A Bot That Will Help Make It Easy 
+For Your Groups, Add Me To Your Groups And Make Admin.
 """
 
 
@@ -176,33 +176,60 @@ def start(bot: Bot, update: Update, args: List[str]):
                 IMPORTED["rules"].send_rules(update, args[0], from_pm=True)
 
         else:
-            send_start(bot, update)
+            first_name = update.effective_user.first_name
+            update.effective_message.reply_photo(
+                START_IMG,
+                PM_START_TEXT.format(
+                    escape_markdown(first_name), escape_markdown(context.bot.first_name),
+                ),
+                parse_mode=ParseMode.MARKDOWN,
+                disable_web_page_preview=True,
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton(
+                                text="➕ Add Me To Your Group ➕",
+                                url="t.me/{}?startgroup=true".format(
+                                    context.bot.username,
+                                ),
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="💡 Support",
+                                url=f"https://t.me/Rose_Userbot",
+                            ),
+                            InlineKeyboardButton(
+                                text="🚨 Updates",
+                                url="https://t.me/SpinningEart",
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="Music Bot",
+                                url="https://t.me/SpinningEarth1_Bot",
+                            ),
+                            InlineKeyboardButton(
+                                text="Stream Bot",
+                                url="https://t.me/SpinningEarth2_Bot",
+                            ),
+                        ],
+                        [
+                            InlineKeyboardButton(
+                                text="📗Modules📗",
+                                url="t.me/{}?start=help",
+                            ),
+                        ],
+                    ],
+                ),
+            )
     else:
-        update.effective_message.reply_text("Heya,{} Here..\nHow can I help you? 🙂".format(bot.first_name),reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="⚜️Help",url="t.me/{}?start=help".format(bot.username))]]))
-
-def send_start(bot, update):
-    #Try to remove old message
-    try:
-        query = update.callback_query
-        query.message.delete()
-    except:
-        pass
-
-    chat = update.effective_chat  # type: Optional[Chat]
-    first_name = update.effective_user.first_name 
-    text = PM_START_TEXT
-
-    keyboard = [[InlineKeyboardButton(text="[► Help ◄]",callback_data="help_back"),InlineKeyboardButton(text="[► Creator ◄]",url="https://t.me/xflicks")]]
-    keyboard += [[InlineKeyboardButton(text="[► Source ◄]",url="https://github.com/FeriEXP/JisooXRobot"),InlineKeyboardButton(text="[► Add Me ◄]",url="t.me/{}?startgroup=true".format(bot.username))]]
-
-    update.effective_message.reply_photo(img, PM_START_TEXT.format(escape_markdown(first_name), escape_markdown(bot.first_name), OWNER_NAME, OWNER_ID), 
-                                         reply_markup=InlineKeyboardMarkup(keyboard), disable_web_page_preview=True, parse_mode=ParseMode.MARKDOWN)
-
-
-def m_connect_button(bot, update):
-    bot.delete_message(update.effective_chat.id, update.effective_message.message_id)
-    connect_button(bot, update)
+        update.effective_message.reply_text(
+            "I'm awake already!\n<b>Haven't slept since:</b> <code>{}</code>".format(
+                uptime,
+            ),
+            parse_mode=ParseMode.HTML,
+        )
 
 
 # for test purposes
