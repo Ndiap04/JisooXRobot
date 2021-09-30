@@ -598,10 +598,6 @@ def main():
     IMDB_HANDLER = CommandHandler('imdb', imdb, pass_args=True)
     IMDB_SEARCHDATAHANDLER = CallbackQueryHandler(imdb_searchdata)
    
-    start_callback_handler = CallbackQueryHandler(send_start, pattern=r"bot_start")
-    dispatcher.add_handler(start_callback_handler)
-
-
     help_handler = CommandHandler("help", get_help)
     help_callback_handler = CallbackQueryHandler(help_button, pattern=r"help_")
 
