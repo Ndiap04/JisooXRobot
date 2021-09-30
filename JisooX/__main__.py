@@ -180,7 +180,7 @@ def start(bot: Bot, update: Update, args: List[str]):
             update.effective_message.reply_photo(
                 START_IMG,
                 PM_START_TEXT.format(
-                    escape_markdown(first_name), escape_markdown(context.bot.first_name),
+                    escape_markdown(first_name), escape_markdown(bot.first_name),
                 ),
                 parse_mode=ParseMode.MARKDOWN,
                 disable_web_page_preview=True,
