@@ -360,6 +360,57 @@ def send_settings(chat_id, user_id, user=False):
                 parse_mode=ParseMode.MARKDOWN,
             )
 
+@run_async
+def get_help(bot: Bot, update: Update):
+    chat = update.effective_chat  # type: Optional[Chat]
+    args = update.effective_message.text.split(None, 1)
+
+    # ONLY send help in PM
+    if chat.type != chat.PRIVATE:
+
+        update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
+                                            reply_markup=InlineKeyboardMarkup(
+                                                [[InlineKeyboardButton(text="[► Help ◄]",url="t.me/{}?start=help".format(bot.username))],  
+                                                [InlineKeyboardButton(text="[► Creator ◄]",url="https://t.me/xflicks")]]))
+        return
+
+    elif len(args) >= 2 and any(args[1].lower() == x for x in HELPABLE):
+        module = args[1].lower()
+        text = "Here is the available help for the *{}* module:\n".format(HELPABLE[module].__mod_name__) \
+               + HELPABLE[module].__help__
+        send_help(chat.id, text, InlineKeyboardMarkup([[InlineKeyboardButton(text="🚶‍♂️Back🚶‍♂️", callback_data="help_back")]]))
+
+    else:
+        send_help(chat.id, HELP_STRINGS)
+
+
+def send_settings(chat_id, user_id, user=False):
+    if user:
+        if USER_SETTINGS:
+            settings = "\n\n".join(
+                "*{}*:\n{}".format(mod.__mod_name__, mod.__user_settings__(user_id)) for mod in USER_SETTINGS.values())
+            dispatcher.bot.send_message(user_id, "These are your current settings:" + "\n\n" + settings,
+                                        parse_mode=ParseMode.MARKDOWN)
+
+        else:
+            dispatcher.bot.send_message(user_id, "Seems like there aren't any user specific settings available :'(",
+                                        parse_mode=ParseMode.MARKDOWN)
+
+    else:
+        if CHAT_SETTINGS:
+            chat_name = dispatcher.bot.getChat(chat_id).title
+            dispatcher.bot.send_message(user_id,
+                                        text="Which module would you like to check {}'s settings for?".format(
+                                            chat_name),
+                                        reply_markup=InlineKeyboardMarkup(
+                                            paginate_modules(0, CHAT_SETTINGS, "stngs", chat=chat_id)))
+        else:
+            dispatcher.bot.send_message(user_id, "Seems like there aren't any chat settings available :'(\nSend this "
+                                                 "in a group chat you're admin in to find its current settings!",
+                                        parse_mode=ParseMode.MARKDOWN)
+
+
+
 
 @run_async
 def settings_button(bot: Bot, update: Update):
@@ -381,7 +432,7 @@ def settings_button(bot: Bot, update: Update):
             query.message.reply_text(text=text,
                                      parse_mode=ParseMode.MARKDOWN,
                                      reply_markup=InlineKeyboardMarkup(
-                                         [[InlineKeyboardButton(text="🏃🏻‍♂️Back🏃🏻‍♂️",
+                                         [[InlineKeyboardButton(text="Back",
                                                                 callback_data="stngs_back({})".format(chat_id))]]))
 
         elif prev_match:
