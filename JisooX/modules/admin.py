@@ -542,17 +542,17 @@ def __chat_settings__(chat_id, user_id):
         dispatcher.bot.get_chat_member(chat_id, user_id).status in ("administrator", "creator"))
 
 __help__ = """
- - /adminlist: list of admins in the chat
+ ✘ /adminlist : list of admins in the chat!
 
 *Admin only:*
- - /pin: silently pins the message replied to - add 'loud' or 'notify' to give notifs to users.
- - /unpin: unpins the currently pinned message
- - /invitelink: gets invitelink
- - /promote: promotes the user replied to
- - /demote: demotes the user replied to
- - /settitle: sets a custom title for an admin that the bot promoted
- - /setgpic: As a reply to file or photo to set group profile pic.
- - /delgpic: Remove group profile pic. 
+ ✘ /pin : silently pins the message replied to - add 'loud' or 'notify' to give notifs to users!
+ ✘ /unipin : unpins the currently pinned message!
+ ✘ /invitelink : gets invitelink!
+ ✘ /promote : promotes the user replied to!
+ ✘ /demote : demotes the user replied to! 
+ ✘ /settitle : sets a custom title for an admin that the bot promoted! 
+ ✘ /setgpic : As a reply to file or photo to set group profile pic! 
+ ✘ /delgpic : Remove group profile pic!  
 """
 
 ADMINLIST_HANDLER = DisableAbleCommandHandler(["adminlist","admins"], adminlist)
@@ -593,4 +593,4 @@ dispatcher.add_handler(CHAT_PIC_HANDLER)
 dispatcher.add_handler(DEL_CHAT_PIC_HANDLER)
 
 
-__mod_name__ = "ADMIN"
+__mod_name__ = "Admin"
