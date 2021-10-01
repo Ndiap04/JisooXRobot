@@ -182,14 +182,14 @@ def __chat_settings__(chat_id, user_id):
 __help__ = """
 You know how sometimes, people join, send 100 messages, and ruin your chat? With antiflood, that happens no more!
 Antiflood allows you to take action on users that send more than x messages in a row. Exceeding the set flood \
-will result in banning or kicking the user.
- - /flood: Get the current flood control setting
+will result in banning or kicking the user!
+ ✘ /flood : Get the current flood control setting!
 *Admin only:*
- - /setflood <int/'no'/'off'>: enables or disables flood control
- - /strongflood <on/yes/off/no>: If set to on, exceeding the flood limit will result in a ban. Else, will just kick.
+ ✘ /setflood <int/'no'/'off'> : enables or disables flood control!
+ ✘ /strongflood <on/yes/off/no> : If set to on, exceeding the flood limit will result in a ban. Else, will just kick!
 """
 
-__mod_name__ = "ANTIFLOOD"
+__mod_name__ = "AntiFlood"
 
 FLOOD_BAN_HANDLER = MessageHandler(Filters.all & ~Filters.status_update & Filters.group, check_flood)
 SET_FLOOD_HANDLER = CommandHandler("setflood", set_flood, pass_args=True, filters=Filters.group)
