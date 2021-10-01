@@ -48,19 +48,8 @@ For Your Groups, Add Me To Your Groups And Make Admin.
 
 
 HELP_STRINGS = """
-Hey there! My name is *{}*.
-I'm a modular group management bot with a few fun extras! Have a look at the following for an idea of some of \
-the things I can help you with.
-*Main* commands available:
- 💠 - /start: start the bot
- 💠 - /help: PM's you this message.
- 💠 - /help <module name>: PM's you info about that module.
- 💠 - /source: Information about my source.
- 💠 - /settings:
-   🔹 - in PM: will send you your settings for all supported modules.
-   🔹 - in a group: will redirect you to pm, with all that chat's settings.
-{}
-And the following:
+ʜᴀʟᴏ ɴᴀᴍᴀ ꜱᴀʏᴀ ᴀᴅᴀʟᴀʜ *{}*!
+ꜱɪʟᴀᴋᴀɴ ᴛᴇᴋᴀɴ ᴛᴏᴍʙᴏʟ ᴅɪʙᴀᴡᴀʜ ᴜɴᴛᴜᴋ ᴍᴇʟɪʜᴀᴛ ʙᴇʙᴇʀᴀᴘᴀ ᴄᴏᴍᴍᴀɴᴅ, ʏᴀɴɢ ʙᴇʟᴜᴍ ᴋᴀʟɪᴀɴ ᴛᴀᴜ!
 """.format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll commands can either be used with / or !.\n")
 
 
